@@ -214,7 +214,7 @@ function listArray() {
         searchHistoryItem.text(city);
         searchHistoryList.prepend(searchHistoryItem);
     });
-    // Update city list history in local storage
+    // Update city in local storage
     localStorage.setItem("cities", JSON.stringify(cityList));
     
 }
@@ -225,7 +225,7 @@ function listArray() {
 function initalizeHistory() {
     if (localStorage.getItem("cities")) {
         cityList = JSON.parse(localStorage.getItem("cities"));
-        var lastIndex = cityList.length - 1;
+        var lastIndex = cityList.length - 5;
         // console.log(cityList);
         listArray();
         // Display the last city viewed
