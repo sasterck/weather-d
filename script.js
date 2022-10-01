@@ -59,7 +59,8 @@ function currentConditionsRequest(searchValue) {
     // Formulate URL for AJAX api call
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&units=imperial&appid=" + APIkey;
     
-// should i use ajax call or fetch? 
+// should i use ajax call or fetch? Going with ajax - let's apply new things. What could go wrong?
+// besides everything.
 
     $.ajax({
         url: queryURL,
@@ -75,6 +76,7 @@ function currentConditionsRequest(searchValue) {
         currentHumidity.text(response.main.humidity + "%");
         currentWindSpeed.text(response.wind.speed + "MPH");
 
+        // i honeslty don't really undertand the lat and lon stuff but all my research says i need it.
         var lat = response.coord.lat;
         var lon = response.coord.lon;
         
@@ -169,9 +171,8 @@ function searchHistory(searchValue) {
             // Push the value again to the array
             cityList.push(searchValue);
 
-            // list all of the cities in user history
-            // so the old entry appears at the top
-            // of the search history
+            // cities should appear as list on the side
+           
             listArray();
             clearHistoryButton.removeClass("hide");
             weatherContent.removeClass("hide");
@@ -183,30 +184,32 @@ function searchHistory(searchValue) {
 // List the array into the search history sidebar
 function listArray() {
 
-
     searchHistoryList.empty();
-    // Repopulate the sidebar with each city
-    // in the array
+
+    // showing histories in side bar
+
     cityList.forEach(function(city){
         var searchHistoryItem = $('<li class="list-group-item city-btn">');
         searchHistoryItem.attr("data-value", city);
         searchHistoryItem.text(city);
         searchHistoryList.prepend(searchHistoryItem);
     });
-    
+
     // local storage now has citiess
     localStorage.setItem("cities", JSON.stringify(cityList));
     
 }
 
-// Grab city list string from local storage
-// and update the city list array
+// initialize city list from local storage
+// 
 function initalizeHistory() {
     if (localStorage.getItem("cities")) {
         cityList = JSON.parse(localStorage.getItem("cities"));
         var lastIndex = cityList.length - 5;
         // console.log(cityList);
+
         listArray();
+
         // Display the last city viewed
         // if page is refreshed
         if (cityList.length !== 0) {
@@ -216,8 +219,8 @@ function initalizeHistory() {
     }
 }
 
-// Check to see if there are elements in
-// search history sidebar in order to show clear history btn
+// adding clear history
+
 function showClear() {
     if (searchHistoryList.text() !== "") {
         clearHistoryButton.removeClass("hide");
