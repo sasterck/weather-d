@@ -1,4 +1,4 @@
-var searchHistoryList = $('#search-history-list');
+var searchHistory = $('#search-history');
 var searchCityInput = $("#search-city");
 var searchCityButton = $("#search-city-button");
 var clearHistoryButton = $("#clear-history");
@@ -8,32 +8,23 @@ var currentTemp = $("#current-temp");
 var currentHumidity = $("#current-humidity");
 var currentWindSpeed = $("#current-wind-speed");
 var UVindex = $("#uv-index");
-
+// Did I get all the variables? I hope so! But also, idk what I'm doing anymore. 
 var weatherContent = $("#weather-content");
 var cityList = [];
-// OpenWeather API
-var APIkey = "e5a600330dcc1a04f3349222a9a1a298";
+// almost forgot this one - OpenWeather API
+var APIkey = "8adc6b62a36fe55da33602a2e4ff70e2";
 
 
-// Find current date and display in title
-var currentDate = moment().format('L');
-$("#current-date").text("(" + currentDate + ")");
-
-// Check if search history exists when page loads
+// Check that search history
 initalizeHistory();
-showClear();
 
-
-    // Grab value entered into search bar 
+    // use whats entered into search bar. Did I even use trim correctly
     var searchValue = searchCityInput.val().trim();
 
 // Clicking the search button will trigger
 // value added to search history
 searchCityButton.on("click", function(event){
     event.preventDefault();
-
-    // Grab value entered into search bar 
-    var searchValue = searchCityInput.val().trim();
 
     currentConditionsRequest(searchValue)
     searchHistory(searchValue);    
@@ -68,8 +59,8 @@ function currentConditionsRequest(searchValue) {
     // Formulate URL for AJAX api call
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&units=imperial&appid=" + APIkey;
     
+// should i use ajax call or fetch? 
 
-    // Make AJAX call
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -87,6 +78,7 @@ function currentConditionsRequest(searchValue) {
         var lat = response.coord.lat;
         var lon = response.coord.lon;
         
+// I don't think this is right? I could do fetch()
 
         var UVurl = "https://api.openweathermap.org/data/2.5/uvi?&lat=" + lat + "&lon=" + lon + "&appid=" + APIkey;
         // AJAX Call for UV index
@@ -102,7 +94,9 @@ function currentConditionsRequest(searchValue) {
         var countryCode = response.sys.country;
         var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?&units=imperial&appid=" + APIkey + "&lat=" + lat +  "&lon=" + lon;
         
-        // AJAX call for 5-day forecast
+        //  5-day forecast call
+
+
         $.ajax({
             url: forecastURL,
             method: "GET"
@@ -142,16 +136,11 @@ function currentConditionsRequest(searchValue) {
                 forecastHumidity.prepend("Humidity: ");
                 forecastHumidity.append("%");
                 
-                // console.log(response.list[i].dt_txt);
-                // console.log(response.list[i].main.temp);
-                // console.log(response.list[i].main.humidity);
 
             }
         });
 
-    });
-
-    
+    });  
 
 };
 
@@ -188,12 +177,13 @@ function searchHistory(searchValue) {
             weatherContent.removeClass("hide");
         }
     }
-    // console.log(cityList);
+
 }
 
 // List the array into the search history sidebar
 function listArray() {
-    // Empty out the elements in the sidebar
+
+
     searchHistoryList.empty();
     // Repopulate the sidebar with each city
     // in the array
@@ -203,14 +193,14 @@ function listArray() {
         searchHistoryItem.text(city);
         searchHistoryList.prepend(searchHistoryItem);
     });
-    // Update city in local storage
+    
+    // local storage now has citiess
     localStorage.setItem("cities", JSON.stringify(cityList));
     
 }
 
 // Grab city list string from local storage
 // and update the city list array
-// for the search history sidebar
 function initalizeHistory() {
     if (localStorage.getItem("cities")) {
         cityList = JSON.parse(localStorage.getItem("cities"));
