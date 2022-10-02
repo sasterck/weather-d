@@ -93,11 +93,9 @@ function currentConditionsRequest(searchValue) {
             UVindex.text(response.value);
         });
 
-        var countryCode = response.sys.country;
         var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?&units=imperial&appid=" + APIkey + "&lat=" + lat +  "&lon=" + lon;
         
-        //  5-day forecast call
-
+        //  5-day forecast call/fetch
 
         $.ajax({
             url: forecastURL,
@@ -148,13 +146,10 @@ function currentConditionsRequest(searchValue) {
 
 // Display and save the search history of cities
 function searchHistory(searchValue) {
-    // Grab value entered into search bar 
-    // var searchValue = searchCityInput.val().trim();
     
     // If there are characters entered into the search bar
     if (searchValue) {
-        // Place value in the array of cities
-        // if it is a new entry
+      
         if (cityList.indexOf(searchValue) === -1) {
             cityList.push(searchValue);
 
@@ -163,8 +158,8 @@ function searchHistory(searchValue) {
             clearHistoryButton.removeClass("hide");
             weatherContent.removeClass("hide");
         } else {
-            // Remove the existing value from
-            // the array
+
+            // Remove value
             var removeIndex = cityList.indexOf(searchValue);
             cityList.splice(removeIndex, 1);
 
@@ -219,7 +214,7 @@ function initalizeHistory() {
     }
 }
 
-// adding clear history
+// adding clear history. This is is killing me. 
 
 function showClear() {
     if (searchHistoryList.text() !== "") {
