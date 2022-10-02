@@ -21,7 +21,9 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 
 ## Visuals
+![Screenshot of Page](Screenshot%20(43).png)
 
+[Deployed site] (https://sasterck.github.io/weather-d/)
 
 ## Installation
 N/A
@@ -35,3 +37,4 @@ Thank you bootstrap, font awesome, and google,
 
 ## Project status
 Fin
+A messy Fin at that.
