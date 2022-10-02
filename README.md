@@ -2,16 +2,29 @@
 Weather Dashboard
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Check yo weather, foo.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+## User Story
+AS A traveler
+I WANT to see the weather outlook for multiple cities
+SO THAT I can plan a trip accordingly
+
+## Acceptance Criteria
+GIVEN a weather dashboard with form inputs
+WHEN I search for a city
+THEN I am presented with current and future conditions for that city and that city is added to the search history
+WHEN I view current weather conditions for that city
+THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the the wind speed
+WHEN I view future weather conditions for that city
+THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
+WHEN I click on a city in the search history
+THEN I am again presented with current and future conditions for that city
 
 ## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+N/A
 
 ## Usage
 Use this to check the weather
